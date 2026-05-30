@@ -10,7 +10,7 @@
 3. 安装后调用服务 `homeassistant.reload_custom_templates`
 
 ### 手动安装
-1. 复制所有 `.jinja` 文件到 `config/custom_templates/`
+1. 复制 `hello_main.jinja` 文件到 `config/custom_templates/`
 2. 调用服务 `homeassistant.reload_custom_templates`
 
 ## 使用方法
