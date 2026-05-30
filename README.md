@@ -93,7 +93,8 @@ icon: mdi:door-open
 show_state: true
 show_units: true
 ~~~
-![Hello Card 效果预览](hello_main.png)
+![hello_main模版传感器效果预览](hello-main.png)
+
 3、在 markdown-card 中可以直接使用
 ~~~
 type: markdown
