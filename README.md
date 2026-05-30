@@ -17,7 +17,7 @@
 
 在模板传感器或卡片配置中：
 
-{% from 'utils.jinja' import format_duration, electricity_total %}
+{% from 'hello_main' import format_duration, electricity_total %}
 
 {# 格式化持续时间 #}
 {{ format_duration(3665) }}  {# 输出：1小时1分 #}
