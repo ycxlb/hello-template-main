@@ -1,4 +1,4 @@
-# Hello Utils Templates
+# Hello main Templates
 
 一组实用的 Home Assistant Jinja2 模板宏，封装常用计算和格式化逻辑。
 
