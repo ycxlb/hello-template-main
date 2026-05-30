@@ -1,0 +1,18 @@
+{# ============================================
+   辅助函数（内部使用，不直接对外暴露）
+   ============================================ #}
+
+{# 安全获取数值 #}
+{% macro safe_float(value, default=0) %}
+  {{ value | float(default) }}
+{% endmacro %}
+
+{# 截断字符串 #}
+{% macro truncate(text, length=20) %}
+  {% set t = text | string %}
+  {% if t | length > length %}
+    {{ t[:length-3] }}...
+  {% else %}
+    {{ t }}
+  {% endif %}
+{% endmacro %}

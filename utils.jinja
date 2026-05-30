@@ -1,0 +1,54 @@
+{# ============================================
+   HA Utils Templates - 主入口文件
+   安装后通过 {% from 'utils.jinja' import xxx %} 调用
+   ============================================ #}
+
+{# 引入辅助模板（可选）#}
+{% include 'helpers.jinja' %}
+
+{# 格式化持续时间 #}
+{% macro format_duration(seconds) %}
+  {% set s = seconds | int(0) %}
+  {% if s < 60 %}
+    {{ s }}秒
+  {% elif s < 3600 %}
+    {{ (s // 60) }}分{{ (s % 60) }}秒
+  {% else %}
+    {{ (s // 3600) }}小时{{ ((s % 3600) // 60) }}分
+  {% endif %}
+{% endmacro %}
+
+{# 计算电费（含附加费用）#}
+{% macro electricity_total(spot_price, transport=0.05, broker=0.02, vat=0.13) %}
+  {% set price = spot_price | float(0) %}
+  {% set total = (price + transport + broker) * (1 + vat) %}
+  {{ total | round(4) }}
+{% endmacro %}
+
+{# 状态徽章（带颜色）#}
+{% macro state_badge(entity_id, on_text="开启", off_text="关闭") %}
+  {% set state = states(entity_id) %}
+  {% if state in ['on', 'home', 'true', 'open'] %}
+    <span style="color: var(--success-color);">● {{ on_text }}</span>
+  {% elif state in ['off', 'not_home', 'false', 'closed'] %}
+    <span style="color: var(--disabled-text-color);">○ {{ off_text }}</span>
+  {% elif state == 'unavailable' %}
+    <span style="color: var(--error-color);">✕ 离线</span>
+  {% else %}
+    <span style="color: var(--warning-color);">? {{ state }}</span>
+  {% endif %}
+{% endmacro %}
+
+{# 数值范围颜色（用于温度、湿度等）#}
+{% macro range_color(value, min_val, max_val, low_color="#42A5F5", mid_color="#66BB6A", high_color="#EF5350") %}
+  {% set v = value | float(0) %}
+  {% set range = max_val | float(0) - min_val | float(0) %}
+  {% set ratio = (v - min_val | float(0)) / range if range > 0 else 0 %}
+  {% if ratio < 0.33 %}
+    {{ low_color }}
+  {% elif ratio < 0.66 %}
+    {{ mid_color }}
+  {% else %}
+    {{ high_color }}
+  {% endif %}
+{% endmacro %}
