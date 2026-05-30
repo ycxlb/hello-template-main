@@ -3,8 +3,20 @@
    安装后通过 {% from 'utils.jinja' import xxx %} 调用
    ============================================ #}
 
-{# 引入辅助模板（可选）#}
-{% include 'helpers.jinja' %}
+{# 安全获取数值 #}
+{% macro safe_float(value, default=0) %}
+  {{ value | float(default) }}
+{% endmacro %}
+
+{# 截断字符串 #}
+{% macro truncate(text, length=20) %}
+  {% set t = text | string %}
+  {% if t | length > length %}
+    {{ t[:length-3] }}...
+  {% else %}
+    {{ t }}
+  {% endif %}
+{% endmacro %}
 
 {# 格式化持续时间 #}
 {% macro format_duration(seconds) %}
