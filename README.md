@@ -6,7 +6,7 @@
 
 ### 通过 HACS（需开启实验性功能）
 1. HACS → 设置 → 开启**实验性功能**
-2. 自定义仓库 → 添加 URL为(  https://github.com/ycxlb/hello-template-utils  )，类别选择 **Template**
+2. 自定义仓库 → 添加 URL为(  https://github.com/ycxlb/hello-template-main  )，类别选择 **Template**
 3. 安装后调用服务 `homeassistant.reload_custom_templates`
 
 ### 手动安装
