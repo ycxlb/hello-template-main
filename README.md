@@ -49,33 +49,38 @@ button-card 支持 [[[ ... ]]] JavaScript 模板，但不支持直接导入 .jin
 通过 entity 绑定模板传感器
 
 1、创建模板传感器
+   推荐使用“辅助元素”进行创建模版传感器，使用configuration.yaml创建极不稳定不方便
+   
+    点击HA的：设置 → 设备与服务 → 辅助元素 → 创建辅助元素/template → 模板 → 模板传感器
+    
+名称：电费总价
 
-先在 configuration.yaml 或 UI 中创建模板传感器，然后在卡片中直接使用：
+状态模板：
 ~~~
-# configuration.yaml
-template:
-  - sensor:
-      - name: 格式化持续时间
-        state: >
-          {% from 'hello_main.jinja' import format_duration %}
-          {{ format_duration(states('input_number.seconds') | int(0)) }}
-
-      - name: 电费总价
-        state: >
-          {% from 'hello_main.jinja' import electricity_total %}
-          {{ electricity_total(states('sensor.spot_price'), 0.05, 0.02) }}
-
-      - name: 门状态徽章
-        state: >
-          {% from 'hello_main.jinja' import state_badge %}
-          {{ state_badge('binary_sensor.door', '开门', '关门') }}
+{% from 'hello_main.jinja' import electricity_total %}
+{{ electricity_total(120, 0.05, 0.02) }}
 ~~~
+其它类似，这儿我用数字代替了实体
+
+名称：门状态徽章
+
+状态模板：
+
+~~~
+{% from 'hello_main.jinja' import state_badge %}
+{{ state_badge('input_boolean.virtual_light_switch', '开门', '关门') }}    
+~~~
+
+其它类似，这儿我用数字代替了实体
+
 2、然后在卡片中：
 ~~~
 type: custom:button-card
-entity: sensor.电费总价
+entity: sensor.dian_fei_zong_jie
 name: 当前电价
 icon: mdi:currency-usd
+show_state: true          # 显示实体状态
+show_units: true          # 显示单位
 ~~~
 3、在 markdown-card 中可以直接使用
 ~~~
