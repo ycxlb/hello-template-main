@@ -2,4 +2,5 @@
   "name": "Hello main Templates",
   "filename": "hello_main.jinja",
   "homeassistant": "2022.2.0"
+  "icon": "mdi:code-braces"
 }
