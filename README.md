@@ -74,6 +74,8 @@ button-card 支持 [[[ ... ]]] JavaScript 模板，但不支持直接导入 .jin
 其它类似，这儿我用数字代替了实体
 
 2、然后在卡片中：
+
+显示当前电价
 ~~~
 type: custom:button-card
 entity: sensor.dian_fei_zong_jie
@@ -82,6 +84,16 @@ icon: mdi:currency-usd
 show_state: true          # 显示实体状态
 show_units: true          # 显示单位
 ~~~
+显示门的状态
+~~~
+type: custom:button-card
+entity: sensor.men_zhuang_tai_hui_zhang
+name: 门的状态
+icon: mdi:door-open
+show_state: true
+show_units: true
+~~~
+
 3、在 markdown-card 中可以直接使用
 ~~~
 type: markdown
