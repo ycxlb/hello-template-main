@@ -1,5 +1,5 @@
 {
   "name": "Hello Utils Templates",
-  "filename": "utils.jinja",
+  "filename": "main.jinja",
   "homeassistant": "2022.2.0"
 }
